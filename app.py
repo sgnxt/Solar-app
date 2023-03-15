@@ -134,7 +134,7 @@ for i in indexlength:
     e[i] = (e[i-1] * 0.035) + e[i-1]
     i += 1
 df6 = pd.DataFrame(e, columns=['Monthly Payment'])
-df6.index = df5.index + 1
+df6.index = df5.index 
 
 col5, col6 = st.columns(2)
 with col5:
