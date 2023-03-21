@@ -14,9 +14,9 @@ with st.sidebar:
     name= st.text_input('Name')
     streetname= st.text_input('Street name')
     streetnumber = st.number_input('Street number')
-    monthlybill= st.number_input('Montly Bill Payment ($)')
-    monthlyusage= st.number_input('Monthly electric usage (Kwh)')
-    yearlyusage = st.number_input('Yearly electric usage')
+    monthlybill= int(st.number_input('Montly Bill Payment ($)') or 218)
+    monthlyusage= int(st.number_input('Monthly electric usage (Kwh)') or 615)
+    yearlyusage = int(st.number_input('Yearly electric usage') or 10104)
 
 ##Sidebar styling
 st.markdown("""
