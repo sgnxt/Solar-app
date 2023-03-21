@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
-#import plotly.express as px
-#from PIL import Image
+import plotly.express as px
+from PIL import Image
 
 st.set_page_config(page_title= "Solar App")
 
@@ -14,9 +14,17 @@ with st.sidebar:
     name= st.text_input('Name')
     streetname= st.text_input('Street name')
     streetnumber = st.number_input('Street number')
-    monthlybill= int(st.number_input('Montly Bill Payment ($)') or 218)
-    monthlyusage= int(st.number_input('Monthly electric usage (Kwh)') or 615)
-    yearlyusage = int(st.number_input('Yearly electric usage') or 10104)
+    monthlybill= st.number_input('Montly Bill Payment ($)')
+    monthlyusage= st.number_input('Monthly electric usage (Kwh)')
+    yearlyusage = st.number_input('Yearly electric usage')
+
+    if not monthlybill:
+        monthlybill = 218
+    if not monthlyusage:
+        monthlyusage = 615
+    if not yearlyusage:
+        yearlyusage = 10104
+    
 
 ##Sidebar styling
 st.markdown("""
@@ -69,7 +77,7 @@ with col2:
 ##DATAFRAME TABLE WITHOUT SOLAR
 #Create a list of 25 years, and carry out the percentage increase of 8%
 a = list(range(1,26))
-a[0] = 298.47
+a[0] = monthlyavgbill
 a[0] = (a[0] * 0.08) + a[0]
 indexlength = range(1, len(a))
 for i in indexlength: 
@@ -134,7 +142,7 @@ for i in indexlength:
     e[i] = (e[i-1] * 0.035) + e[i-1]
     i += 1
 df6 = pd.DataFrame(e, columns=['Monthly Payment'])
-df6.index = df5.index 
+df6.index = df5.index + 1
 
 col5, col6 = st.columns(2)
 with col5:
